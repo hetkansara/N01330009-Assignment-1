@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        * {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border: none;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        td {
+            padding: 5px;
+            margin: 0;
+            border: 1px solid grey;
+        }
+
+        th {
+            background-color: black;
+            color: white;
+            padding: 5px;
+            text-align: left;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin: 7px;
+        }
+
+        input[type="radio"] {
+            width: auto;
+            margin: 7px;
+        }
+
+        .incident-container {
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        table {
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        .no-border {
+            border: 0;
+        }
+
+            .no-border input {
+                padding: 10px;
+                font-weight: bold;
+                border: 1px solid grey;
+            }
+    </style>
+</head>
+<body>
+    <div class="incident-container">
+        <center>
+            <h1>Skiing Incident Report</h1>
+        </center>
+        <form method="POST" action="https://postman-echo.com/post">
+            <table>
+                <tr>
+                    <th colspan="4">
+                        INCIDENT INFORMATION
+                    </th>
+                </tr>
+                <tr>
+                    <td>Date of Incident</td>
+                    <td colspan="3">
+                        <input type="date" name="incident_date" id="incident_date" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Time of Incident</td>
+                    <td>
+                        <input type="number" name="incident_time_hours" id="incident_time_hours" min="0" max="11" placeholder="hours" />
+                    </td>
+                    <td>
+                        <input type="number" name="incident_time_minutes" id="incident_time_minutes" min="0" max="59" placeholder="minutes" />
+                    </td>
+                    <td>
+                        <select name="incident_time_type">
+                            <option value="" selected disabled>AM / PM</option>
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Location of Incident</td>
+                    <td colspan="3">
+                        <textarea name="incident_location" id="incident_location" cols="5" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Describe the incident</td>
+                    <td colspan="3">
+                        <textarea name="incident_description" id="incident_description" cols="5" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Weather</td>
+                    <td colspan="3">
+                        <section>
+                            <input type="radio" value="Clear" name="weather" id="weather_type_1">
+                            <label for="weather_type_1">Clear (The sky was clear or had some clouds)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Overcast" name="weather" id="weather_type_2">
+                            <label for="weather_type_2">Overcast (There was a general overcast )</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Snowing" name="weather" id="weather_type_3">
+                            <label for="weather_type_3">Snowing (It was snowing at the time of the incident )</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Raining" name="weather" id="weather_type_4">
+                            <label for="weather_type_4">Raining (It was raining at the time of the incident)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Fog" name="weather" id="weather_type_5">
+                            <label for="weather_type_5">Fog (There was fog at the time and place of the incident )</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Unknown" name="weather" id="weather_type_6">
+                            <label for="weather_type_6">Unknown (Incident was not reported when it occurred but at a later date/time )</label>
+                        </section>
+                        <section>
+                            <input type="radio" value=" N/A" name="weather" id="weather_type_7">
+                            <label for="weather_type_7"> N/A (Not applicable ie: indoors)</label>
+                        </section>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Temp C</td>
+                    <td colspan="3">
+                        <section>
+                            <input type="radio" value="Above10" name="temprature" id="temprature_type_1">
+                            <label for="temprature_type_1">Above10 (At the time and site air temperature estimate above 10)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="0 to10" name="temprature" id="temprature_type_2">
+                            <label for="temprature_type_2">0 to10 (As above estimated to 0 to 10)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value=" -10 to 0" name="temprature" id="temprature_type_3">
+                            <label for="temprature_type_3"> -10 to 0 (Below 0 and above -10)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="-20 to -11" name="temprature" id="temprature_type_4">
+                            <label for="temprature_type_4"> -20 to -11 (Estimated between -11 and -20)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Below 20" name="temprature" id="temprature_type_5">
+                            <label for="temprature_type_5">Below 20 (Estimated below -21)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Unknown" name="temprature" id="temprature_type_6">
+                            <label for="temprature_type_6">Unknown (Incident was not reported when it occurred but at a later date/time)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value=" N/A" name="temprature" id="temprature_type_7">
+                            <label for="temprature_type_7"> N/A (Not applicable ie: indoors)</label>
+                        </section>
+                        <section>
+                            Temperature refers to the general air temperature at the time and location of the incident. It does
+                            not refer to snow temperature, which will always be below 0.
+                        </section>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Snow</td>
+                    <td colspan="3">
+                        <section>
+                            <input type="radio" value="No new" name="snow" id="snow_type_1">
+                            <label for="snow_type_1">No new (There has been no new snow in the previous 24 hours) </label>
+                        </section>
+                        <section>
+                            <input type="radio" value="0 to 5" name="snow" id="snow_type_2">
+                            <label for="snow_type_2"> 0 to 5 (Up to 5 cm of new snow) </label>
+                        </section>
+                        <section>
+                            <input type="radio" value="5 to 10" name="snow" id="snow_type_3">
+                            <label for="snow_type_3"> 5 to 10 (Between 6 and 10 cm ) </label>
+                        </section>
+                        <section>
+                            <input type="radio" value="10 to 15" name="snow" id="snow_type_4">
+                            <label for="snow_type_4">10 to 15 (Between 11 and 15 cm) </label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Over 15" name="snow" id="snow_type_5">
+                            <label for="snow_type_5">Over 15 (More than 16 cm of new snow)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Unknown" name="snow" id="snow_type_6">
+                            <label for="snow_type_6">Unknown (Incident was not reported when it occurred but at a later date/time)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value=" N/A" name="snow" id="snow_type_7">
+                            <label for="snow_type_7"> N/A (Not applicable ie: indoors)</label>
+                        </section>
+                        <section>
+                            This category refers to snow that has accumulated over the past 24 hours. I.e.: on the day of, and
+                            before the incident.
+                        </section>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Light</td>
+                    <td colspan="3">
+                        <section>
+                            <input type="radio" value="Sharp" name="light" id="light_type_1">
+                            <label for="light_type_1">Sharp (There was enough light for distinct shadows)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Flat" name="light" id="light_type_2">
+                            <label for="light_type_2">Flat (Diffused light – shadows are not distinct)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Whiteout" name="light" id="light_type_3">
+                            <label for="light_type_3">Whiteout (Diffused dim light or obscured light – difficult to judge depth due to lack of shadows)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Lights" name="light" id="light_type_4">
+                            <label for="light_type_4">Lights (Night lights)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Dark" name="light" id="light_type_5">
+                            <label for="light_type_5">Dark (No lighting)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Unknown" name="light" id="light_type_6">
+                            <label for="light_type_6">Unknown (Incident was not reported when it occurred but at a later date/time )</label>
+                        </section>
+                        <section>
+                            <input type="radio" value=" N/A" name="light" id="light_type_7">
+                            <label for="light_type_7"> N/A (Not applicable ie: indoors)</label>
+                        </section>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Surface</td>
+                    <td colspan="3">
+                        <section>
+                            <input type="radio" value="Groomed" name="surface" id="surface_type_1">
+                            <label for="surface_type_1">Groomed (The surface at the site had been groomed recently)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Moguls" name="surface" id="surface_type_2">
+                            <label for="surface_type_2">Moguls (There were moguls at the site)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Powder" name="surface" id="surface_type_3">
+                            <label for="surface_type_3">Powder (There was some new snow on the old surface)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Variable" name="surface" id="surface_type_4">
+                            <label for="surface_type_4">Variable (The surface had a mixture of snow types ie: slush or cut up powde)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Granular" name="surface" id="surface_type_5">
+                            <label for="surface_type_5">Granular (The surface snow was melt/freeze granules ie: corn snow)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Hard" name="surface" id="surface_type_6">
+                            <label for="surface_type_6">Hard (The surface was hard enough to resist penetration of poles or ski edges due to freezing or compaction)</label>
+                        </section>
+                        <section>
+                            <input type="radio" value="Unknown" name="surface" id="surface_type_7">
+                            <label for="surface_type_7">Unknown (Incident was not reported when it occurred but at a later date/time )</label>
+                        </section>
+                        <section>
+                            <input type="radio" value=" N/A" name="surface" id="surface_type_8">
+                            <label for="surface_type_8"> N/A (Not applicable ie: indoors)</label>
+                        </section>
+                    </td>
+                </tr>
+                <tr>
+                    <td>People Factors</td>
+                    <td colspan="3">
+                        <section>
+                            <input type="checkbox" name="people_factor_1" id="factor_1">
+                            <label for="factor_1">Procedure not followed/ no procedure exists </label>
+                        </section>
+                        <section>
+                            <input type="checkbox" name="people_factor_2" id="factor_2">
+                            <label for="factor_2">Drugs/ alcohol </label>
+                        </section>
+                        <section>
+                            <input type="checkbox" name="people_factor_3" id="factor_3">
+                            <label for="factor_3">Fatigue </label>
+                        </section>
+                        <section>
+                            <input type="checkbox" name="people_factor_4" id="factor_4">
+                            <label for="factor_4">Time/ production pressures </label>
+                        </section>
+                        <section>
+                            <input type="checkbox" name="people_factor_5" id="factor_5">
+                            <label for="factor_5">Change of routine </label>
+                        </section>
+                        <section>
+                            <input type="checkbox" name="people_factor_6" id="factor_6">
+                            <label for="factor_6">Distraction/ personal issues/ stress </label>
+                        </section>
+                        <section>
+                            <input type="checkbox" name="people_factor_7" id="factor_7">
+                            <label for="factor_7">Lack of communication </label>
+                        </section>
+                        <section>
+                            <input type="checkbox" name="people_factor_8" id="factor_8">
+                            <label for="factor_8">Other</label>
+                        </section>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Actions taken</td>
+                    <td colspan="3">
+                        <textarea name="actions_taken_after_incident" id="actions_taken_after_incident" cols="5" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">
+                        WITNESS INFORMATION
+                    </th>
+                </tr>
+                <tr>
+                    <td>First Name</td>
+                    <td>
+                        <input type="text" name="witness_first_name" id="witness_first_name" />
+                    </td>
+                    <td>Last Name</td>
+                    <td>
+                        <input type="text" name="witness_last_name" id="witness_last_name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td colspan="3">
+                        <input type="number" name="witness_phone_number" id="witness_phone_number" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td colspan="3">
+                        <input type="email" name="witness_email" id="witness_email" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="no-border"></td>
+                    <td colspan="3" class="no-border">
+                        <input type="submit" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
