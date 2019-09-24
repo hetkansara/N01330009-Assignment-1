@@ -10,17 +10,18 @@
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
-        input,
+         input,
         textarea,
         select {
             width: 100%;
-            border: none;
+            border: 1px solid lighgrey;
+            padding: 5px;
         }
 
         textarea {
             resize: none;
         }
-
+        /*
         td {
             padding: 5px;
             margin: 0;
@@ -31,9 +32,9 @@
             padding: 0;
             margin: 0;
             border: 0;
-        }
+        } */
 
-        th {
+        .form-heading {
             background-color: black;
             color: white;
             padding: 5px;
@@ -55,10 +56,7 @@
             width: 80%;
         }
 
-        .form-table {
-            margin: 0 auto;
-            width: 80%;
-        }
+        
 
         .no-border {
             border: 0;
@@ -71,6 +69,29 @@
         }
         .heading{
             text-align: center;
+        } 
+
+        .form-container {
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .flex-container > .flex-item {
+            flex: auto;
+            padding: 7px;
+        }
+
+        .raw-item {
+            padding: 7px;
+        }
+        .form-item{
+            border: 1px solid lightgrey;
+            padding-right: 10px;
         }
     </style>
 </head>
@@ -80,131 +101,171 @@
             <h1>Skiing Incident Report</h1>
         </section>
         <form method="POST" id="incident_form" runat="server" action="https://postman-echo.com/post">
-            <table class="form-table">
-                <thaed>
-                    <tr>
-                        <th colspan="4">
-                            INCIDENT INFORMATION
-                        </th>
-                    </tr>
-                </thaed>
-                <tbody>
-                    <tr>
-                        <td>Date of Incident</td>
-                        <td colspan="3">
+            <div class="form-container">
+                <section class="form-heading">
+                    <div class="flex-container">
+                        <div class="flex-item">
+                                INCIDENT INFORMATION
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Date of Incident</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:TextBox ID="incident_date" runat="server" TextMode="Date"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Time of Incident</td>
-                        <td>
-                            <asp:TextBox ID="incident_time_hours" runat="server" TextMode="Number" min="0" max="11" placeholder="hours"></asp:TextBox>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="incident_time_minutes" runat="server" TextMode="Number" min="0" max="59" placeholder="minutes"></asp:TextBox>
-                        </td>
-                        <td>
-                             <asp:DropDownList runat="server" ID="incident_time_type">
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter date of an incident" ControlToValidate="incident_date"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Time of Incident</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <asp:TextBox ID="incident_time_hours" runat="server" TextMode="Number" placeholder="hours"></asp:TextBox>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter incident time (Hours)." ControlToValidate="incident_time_hours"></asp:RequiredFieldValidator>
+                            <asp:RangeValidator runat="server" EnableClientScript="true" ControlToValidate="incident_time_hours" ErrorMessage="Incident time hours should be between 0 and 11." MinimumValue="0" MaximumValue="11" ></asp:RangeValidator>
+                        </div>
+                        <div class="flex-item">
+                            <asp:TextBox ID="incident_time_minutes" runat="server" TextMode="Number" placeholder="minutes"></asp:TextBox>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter incident time (Minutes)." ControlToValidate="incident_time_minutes"></asp:RequiredFieldValidator>
+                            <asp:RangeValidator runat="server" EnableClientScript="true" ControlToValidate="incident_time_minutes" ErrorMessage="Incident time minutes should be between 0 and 59." MinimumValue="0" MaximumValue="59" ></asp:RangeValidator>
+                        </div>
+                        <div  class="flex-item">
+                            <asp:DropDownList runat="server" ID="incident_time_type">
                                 <asp:ListItem Text="AM / PM" Value="" selected="true" disabled="true"></asp:ListItem>
                                 <asp:ListItem Text="AM" Value="AM"></asp:ListItem>
                                 <asp:ListItem Text="PM" Value="PM"></asp:ListItem>
                             </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Location of Incident</td>
-                        <td colspan="3">
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please select value for incident time (AM/PM)." ControlToValidate="incident_time_type"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Location of Incident</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:TextBox id="incident_location" TextMode="multiline" Columns="5" Rows="5" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Describe the incident</td>
-                        <td colspan="3">
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter location of the incident." ControlToValidate="incident_location"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Describe the incident</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:TextBox id="incident_description" TextMode="multiline" Columns="5" Rows="5" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Weather</td>
-                        <td colspan="3">
-                             <asp:RadioButtonList runat="server" ID="weather">
-                                <asp:ListItem Text="Clear (The sky was clear or had some clouds)" Value="weather_type_1"></asp:ListItem>
-                                <asp:ListItem Text="Overcast (There was a general overcast)" Value="weather_type_2"></asp:ListItem>
-                                <asp:ListItem Text="Snowing (It was snowing at the time of the incident)" Value="weather_type_3"></asp:ListItem>
-                                <asp:ListItem Text="Raining (It was raining at the time of the incident)" Value="weather_type_4"></asp:ListItem>
-                                <asp:ListItem Text="Fog (There was fog at the time and place of the incident)" Value="weather_type_5"></asp:ListItem>
-                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="weather_type_6"></asp:ListItem>
-                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="weather_type_7"></asp:ListItem>
-                            </asp:RadioButtonList>
-                       
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Temp C</td>
-                        <td colspan="3">
-                            <asp:RadioButtonList runat="server" ID="temprature">
-                                <asp:ListItem Text="Above10 (At the time and site air temperature estimate above 10)" Value="temprature_type_1"></asp:ListItem>
-                                <asp:ListItem Text="0 to10 (As above estimated to 0 to 10)" Value="temprature_type_2"></asp:ListItem>
-                                <asp:ListItem Text="-10 to 0 (Below 0 and above -10)" Value="temprature_type_3"></asp:ListItem>
-                                <asp:ListItem Text="-20 to -11 (Estimated between -11 and -20)" Value="temprature_type_4"></asp:ListItem>
-                                <asp:ListItem Text="Below 20 (Estimated below -21)" Value="temprature_type_5"></asp:ListItem>
-                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="temprature_type_6"></asp:ListItem>
-                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="temprature_type_7"></asp:ListItem>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please describe the incident." ControlToValidate="incident_location"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Weather</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <asp:RadioButtonList runat="server" ID="environment_weather">
+                            <asp:ListItem Text="Clear (The sky was clear or had some clouds)" Value="environment_weather_type_1"></asp:ListItem>
+                            <asp:ListItem Text="Overcast (There was a general overcast)" Value="environment_weather_type_2"></asp:ListItem>
+                            <asp:ListItem Text="Snowing (It was snowing at the time of the incident)" Value="environment_weather_type_3"></asp:ListItem>
+                            <asp:ListItem Text="Raining (It was raining at the time of the incident)" Value="environment_weather_type_4"></asp:ListItem>
+                            <asp:ListItem Text="Fog (There was fog at the time and place of the incident)" Value="environment_weather_type_5"></asp:ListItem>
+                            <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="environment_weather_type_6"></asp:ListItem>
+                            <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="environment_weather_type_7"></asp:ListItem>
+                        </asp:RadioButtonList>
+                        <section>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please select weather type of the incident place." ControlToValidate="environment_weather"></asp:RequiredFieldValidator>
+                        </section>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Temp C</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <asp:RadioButtonList runat="server" ID="incident_place_temprature">
+                                <asp:ListItem Text="Above10 (At the time and site air temperature estimate above 10)" Value="incident_place_temprature_type_1"></asp:ListItem>
+                                <asp:ListItem Text="0 to10 (As above estimated to 0 to 10)" Value="incident_place_temprature_type_2"></asp:ListItem>
+                                <asp:ListItem Text="-10 to 0 (Below 0 and above -10)" Value="incident_place_temprature_type_3"></asp:ListItem>
+                                <asp:ListItem Text="-20 to -11 (Estimated between -11 and -20)" Value="incident_place_temprature_type_4"></asp:ListItem>
+                                <asp:ListItem Text="Below 20 (Estimated below -21)" Value="incident_place_temprature_type_5"></asp:ListItem>
+                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="incident_place_temprature_type_6"></asp:ListItem>
+                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="incident_place_temprature_type_7"></asp:ListItem>
                             </asp:RadioButtonList>
                             <section> 
                                 Temperature refers to the general air temperature at the time and location of the incident. It does not refer to snow temperature, which will always be below 0.
                             </section>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Snow</td>
-                        <td colspan="3">
-                            <asp:RadioButtonList runat="server" ID="snow">
-                                <asp:ListItem Text="No new (There has been no new snow in the previous 24 hours)" Value="snow_type_1"></asp:ListItem>
-                                <asp:ListItem Text="0 to 5 (Up to 5 cm of new snow)" Value="snow_type_2"></asp:ListItem>
-                                <asp:ListItem Text="5 to 10 (Between 6 and 10 cm)" Value="snow_type_3"></asp:ListItem>
-                                <asp:ListItem Text="10 to 15 (Between 11 and 15 cm)" Value="snow_type_4"></asp:ListItem>
-                                <asp:ListItem Text="Over 15 (More than 16 cm of new snow)" Value="snow_type_5"></asp:ListItem>
-                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="snow_type_6"></asp:ListItem>
-                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="snow_type_7"></asp:ListItem>
+                            <section>
+                                <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please select temprature of the incident place." ControlToValidate="incident_place_temprature"></asp:RequiredFieldValidator>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Snow</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <asp:RadioButtonList runat="server" ID="environment_snow">
+                                <asp:ListItem Text="No new (There has been no new snow in the previous 24 hours)" Value="environment_snow_type_1"></asp:ListItem>
+                                <asp:ListItem Text="0 to 5 (Up to 5 cm of new snow)" Value="environment_snow_type_2"></asp:ListItem>
+                                <asp:ListItem Text="5 to 10 (Between 6 and 10 cm)" Value="environment_snow_type_3"></asp:ListItem>
+                                <asp:ListItem Text="10 to 15 (Between 11 and 15 cm)" Value="environment_snow_type_4"></asp:ListItem>
+                                <asp:ListItem Text="Over 15 (More than 16 cm of new snow)" Value="environment_snow_type_5"></asp:ListItem>
+                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="environment_snow_type_6"></asp:ListItem>
+                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="environment_snow_type_7"></asp:ListItem>
                             </asp:RadioButtonList>
                             <br> This category refers to snow that has accumulated over the past 24 hours. I.e.: on the day of, and
                             before the incident.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Light</td>
-                        <td colspan="3">
-                            <asp:RadioButtonList runat="server" ID="light">
-                                <asp:ListItem Text="Sharp (There was enough light for distinct shadows)" Value="light_type_1"></asp:ListItem>
-                                <asp:ListItem Text="Flat (Diffused light – shadows are not distinct)" Value="light_type_2"></asp:ListItem>
-                                <asp:ListItem Text="Whiteout (Diffused dim light or obscured light – difficult to judge depth due to lack of shadows)" Value="light_type_3"></asp:ListItem>
-                                <asp:ListItem Text="Lights (Night lights)" Value="light_type_4"></asp:ListItem>
-                                <asp:ListItem Text="Dark (No lighting)" Value="light_type_5"></asp:ListItem>
-                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="light_type_6"></asp:ListItem>
-                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="light_type_7"></asp:ListItem>
+                            <section>
+                                <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please select snow type of the incident place." ControlToValidate="environment_snow"></asp:RequiredFieldValidator>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Light</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <asp:RadioButtonList runat="server" ID="environment_light">
+                                <asp:ListItem Text="Sharp (There was enough light for distinct shadows)" Value="environment_light_type_1"></asp:ListItem>
+                                <asp:ListItem Text="Flat (Diffused light – shadows are not distinct)" Value="environment_light_type_2"></asp:ListItem>
+                                <asp:ListItem Text="Whiteout (Diffused dim light or obscured light – difficult to judge depth due to lack of shadows)" Value="environment_light_type_3"></asp:ListItem>
+                                <asp:ListItem Text="Lights (Night lights)" Value="environment_light_type_4"></asp:ListItem>
+                                <asp:ListItem Text="Dark (No lighting)" Value="environment_light_type_5"></asp:ListItem>
+                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="environment_light_type_6"></asp:ListItem>
+                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="environment_light_type_7"></asp:ListItem>
                             </asp:RadioButtonList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Surface</td>
-                        <td colspan="3">
-                            <asp:RadioButtonList runat="server" ID="surface">
-                                <asp:ListItem Text="Groomed (The surface at the site had been groomed recently)" Value="surface_type_1"></asp:ListItem>
-                                <asp:ListItem Text="Moguls (There were moguls at the site)" Value="surface_type_2"></asp:ListItem>
-                                <asp:ListItem Text="Powder (There was some new snow on the old surface)" Value="surface_type_3"></asp:ListItem>
-                                <asp:ListItem Text="Variable (The surface had a mixture of snow types ie: slush or cut up powde)" Value="surface_type_4"></asp:ListItem>
-                                <asp:ListItem Text="Granular (The surface snow was melt/freeze granules ie: corn snow)" Value="surface_type_5"></asp:ListItem>
+                            <section>
+                                <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please select environment light type of the incident place." ControlToValidate="environment_light"></asp:RequiredFieldValidator>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Surface</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <asp:RadioButtonList runat="server" ID="incident_place_surface">
+                                <asp:ListItem Text="Groomed (The surface at the site had been groomed recently)" Value="incident_place_surface_type_1"></asp:ListItem>
+                                <asp:ListItem Text="Moguls (There were moguls at the site)" Value="incident_place_surface_type_2"></asp:ListItem>
+                                <asp:ListItem Text="Powder (There was some new snow on the old surface)" Value="incident_place_surface_type_3"></asp:ListItem>
+                                <asp:ListItem Text="Variable (The surface had a mixture of snow types ie: slush or cut up powde)" Value="incident_place_surface_type_4"></asp:ListItem>
+                                <asp:ListItem Text="Granular (The surface snow was melt/freeze granules ie: corn snow)" Value="incident_place_surface_type_5"></asp:ListItem>
                                 <asp:ListItem Text="Hard (The surface was hard enough to resist penetration of poles or ski edges due to freezing or
-                                compaction)" Value="surface_type_6"></asp:ListItem>
-                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="surface_type_7"></asp:ListItem>
-                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="surface_type_8"></asp:ListItem>
+                                compaction)" Value="incident_place_surface_type_6"></asp:ListItem>
+                                <asp:ListItem Text="Unknown (Incident was not reported when it occurred but at a later date/time)" Value="incident_place_surface_type_7"></asp:ListItem>
+                                <asp:ListItem Text="N/A (Not applicable ie: indoors)" Value="incident_place_surface_type_8"></asp:ListItem>
                             </asp:RadioButtonList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>People Factors</td>
-                        <td colspan="3">
-                            <asp:CheckBoxList runat="server" ID="people_factor">
+                            <section>
+                                <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please select surface type of the incident place." ControlToValidate="incident_place_surface"></asp:RequiredFieldValidator>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">People Factors</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <asp:CheckBoxList runat="server" ID="people_factors">
                                 <asp:ListItem Text="Procedure not followed/ no procedure exists" Value="Procedure not followed/ no procedure exists"></asp:ListItem>
                                 <asp:ListItem Text="Drugs/ alcohol" Value="Drugs/ alcohol"></asp:ListItem>
                                 <asp:ListItem Text="Fatigue" Value="Fatigue"></asp:ListItem>
@@ -214,49 +275,72 @@
                                 <asp:ListItem Text="Lack of communication" Value="Lack of communication"></asp:ListItem>
                                 <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
                             </asp:CheckBoxList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Actions taken</td>
-                        <td colspan="3">
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Actions taken</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:TextBox id="actions_taken_after_incident" TextMode="multiline" Columns="5" Rows="5" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th colspan="4">
-                            WITNESS INFORMATION
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>First Name</td>
-                        <td>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please fill the value for actions taken. (If no actions has been taken, Just place 'None' in the field.)" ControlToValidate="actions_taken_after_incident"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-heading">
+                    <div class="flex-container">
+                        <div class="flex-item">
+                                WITNESS INFORMATION
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">First Name</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:TextBox ID="witness_first_name" runat="server"></asp:TextBox>
-                        </td>
-                        <td>Last Name</td>
-                        <td>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Last Name</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:TextBox ID="witness_last_name" runat="server"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Phone</td>
-                        <td colspan="3">
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Phone</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:TextBox ID="witness_phone_number" runat="server"  TextMode="Number"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td colspan="3">
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">Email</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:TextBox ID="witness_email" runat="server"  TextMode="Email"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="no-border"></td>
-                        <td colspan="3" class="no-border">
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="flex-container">
+                        <div class="flex-item">
+                                <asp:ValidationSummary runat="server" ShowSummary="true" />
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="flex-container">
+                        <div class="flex-item">
                             <asp:Button runat="server" Text="Submit"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>   
         </form>
     </div>
 </body>
