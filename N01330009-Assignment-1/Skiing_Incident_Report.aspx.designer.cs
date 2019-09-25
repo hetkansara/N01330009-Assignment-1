@@ -10,7 +10,7 @@
 namespace N01330009_Assignment_1 {
     
     
-    public partial class WebForm1 {
+    public partial class Skiing_Incident_Report {
         
         /// <summary>
         /// incident_form control.
@@ -76,58 +76,58 @@ namespace N01330009_Assignment_1 {
         protected global::System.Web.UI.WebControls.TextBox incident_description;
         
         /// <summary>
-        /// weather control.
+        /// environment_weather control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList weather;
+        protected global::System.Web.UI.WebControls.RadioButtonList environment_weather;
         
         /// <summary>
-        /// temprature control.
+        /// incident_place_temprature control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList temprature;
+        protected global::System.Web.UI.WebControls.RadioButtonList incident_place_temprature;
         
         /// <summary>
-        /// snow control.
+        /// environment_snow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList snow;
+        protected global::System.Web.UI.WebControls.RadioButtonList environment_snow;
         
         /// <summary>
-        /// light control.
+        /// environment_light control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList light;
+        protected global::System.Web.UI.WebControls.RadioButtonList environment_light;
         
         /// <summary>
-        /// surface control.
+        /// incident_place_surface control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList surface;
+        protected global::System.Web.UI.WebControls.RadioButtonList incident_place_surface;
         
         /// <summary>
-        /// people_factor control.
+        /// people_factors control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList people_factor;
+        protected global::System.Web.UI.WebControls.CheckBoxList people_factors;
         
         /// <summary>
         /// actions_taken_after_incident control.
@@ -173,5 +173,14 @@ namespace N01330009_Assignment_1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox witness_email;
+        
+        /// <summary>
+        /// confirmbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl confirmbox;
     }
 }

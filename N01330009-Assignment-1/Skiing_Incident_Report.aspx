@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Skiing_Incident_Report.aspx.cs" Inherits="N01330009_Assignment_1.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Skiing_Incident_Report.aspx.cs" Inherits="N01330009_Assignment_1.Skiing_Incident_Report" %>
 
 <!DOCTYPE html>
 
@@ -18,21 +18,19 @@
             padding: 5px;
         }
 
+        .submit-button-container input {
+            width: 100px;
+            float: right;
+            border: 0px;
+            padding: 10px;  
+            color: white;
+            background-color: black;
+            font-weight: 500;
+        }
+
         textarea {
             resize: none;
         }
-        /*
-        td {
-            padding: 5px;
-            margin: 0;
-            border: 1px solid grey;
-        }
-        
-        table table td {
-            padding: 0;
-            margin: 0;
-            border: 0;
-        } */
 
         .form-heading {
             background-color: black;
@@ -55,8 +53,6 @@
             margin: 0 auto;
             width: 80%;
         }
-
-        
 
         .no-border {
             border: 0;
@@ -93,6 +89,22 @@
             border: 1px solid lightgrey;
             padding-right: 10px;
         }
+        .form-item span {
+            color: #c62828;
+            display: block;
+        }
+        .summary-container{
+            background-color: #ffebee;
+            color:#c62828;
+        }
+        #summaryInformation{
+            background-color: #e3f2fd;
+        }
+        .incident-summary-values{
+            font-weight: bold;
+            display: inline !important;
+            color:#1e88e5 !important;
+        }
     </style>
 </head>
 <body>
@@ -100,7 +112,7 @@
         <section class="heading">
             <h1>Skiing Incident Report</h1>
         </section>
-        <form method="POST" id="incident_form" runat="server" action="https://postman-echo.com/post">
+        <form method="POST" id="incident_form" runat="server">
             <div class="form-container">
                 <section class="form-heading">
                     <div class="flex-container">
@@ -155,7 +167,7 @@
                     <div class="flex-container">
                         <div class="flex-item">
                             <asp:TextBox id="incident_description" TextMode="multiline" Columns="5" Rows="5" runat="server" />
-                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please describe the incident." ControlToValidate="incident_location"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please describe the incident." ControlToValidate="incident_description"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </section>
@@ -299,6 +311,12 @@
                     <div class="flex-container">
                         <div class="flex-item">
                             <asp:TextBox ID="witness_first_name" runat="server"></asp:TextBox>
+                            <!-- 
+                                - Regex taken from https://rubular.com/r/qfA68b8PO5 and modified for min 3 characters & max 20 characters
+                                - Date: 25th Sept, 2019
+                            -->
+                            <asp:RegularExpressionValidator runat="server" EnableClientScript="true" ControlToValidate="witness_first_name" ValidationExpression="[A-Za-z ]{3,20}" ErrorMessage="Please enter valid firstname.(Minimum 3 characters, Maximum 20 characters, No special characters allowed.)"></asp:RegularExpressionValidator><br>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter your firstname." ControlToValidate="witness_first_name"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </section>
@@ -307,6 +325,12 @@
                     <div class="flex-container">
                         <div class="flex-item">
                             <asp:TextBox ID="witness_last_name" runat="server"></asp:TextBox>
+                            <!-- 
+                                - Regex taken from https://rubular.com/r/qfA68b8PO5 and modified for min 3 characters & max 20 characters
+                                - Date: 25th Sept, 2019
+                             -->
+                            <asp:RegularExpressionValidator runat="server" EnableClientScript="true" ControlToValidate="witness_last_name" ValidationExpression="[A-Za-z ]{3,20}" ErrorMessage="Please enter valid lastname.(Minimum 3 characters, Maximum 20 characters, No special characters allowed.)"></asp:RegularExpressionValidator><br>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter your lastname." ControlToValidate="witness_last_name"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </section>
@@ -314,7 +338,19 @@
                     <div class="raw-item">Phone</div>
                     <div class="flex-container">
                         <div class="flex-item">
-                            <asp:TextBox ID="witness_phone_number" runat="server"  TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="witness_phone_number" runat="server"></asp:TextBox>
+                            <!-- 
+                                - Regex taken from https://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number
+                                - Date: 25th Sept, 2019
+                                - Matches the following
+                                    123-456-7890
+                                    (123) 456-7890
+                                    123 456 7890
+                                    123.456.7890
+                                    +91 (123) 456-7890
+                            -->
+                            <asp:RegularExpressionValidator runat="server" EnableClientScript="true" ControlToValidate="witness_phone_number" ValidationExpression="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" ErrorMessage="Please enter valid phone number. Allowed formats [123-456-7890, (123) 456-7890, 123 456 7890, 123.456.7890, +91 (123) 456-7890]"></asp:RegularExpressionValidator><br>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter your phone number." ControlToValidate="witness_phone_number"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </section>
@@ -323,22 +359,31 @@
                     <div class="flex-container">
                         <div class="flex-item">
                             <asp:TextBox ID="witness_email" runat="server"  TextMode="Email"></asp:TextBox>
+                            <!--  
+                                - Regex taken from https://www.w3resource.com/javascript/form/email-validation.php
+                                - Date 25th Sept, 2019
+                             -->
+                            <asp:RegularExpressionValidator runat="server" EnableClientScript="true" ControlToValidate="witness_email" ValidationExpression="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" ErrorMessage="Please enter valid email address"></asp:RegularExpressionValidator><br>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter your email address." ControlToValidate="witness_email"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </section>
-                <section class="form-item">
+                <section class="form-item summary-container">
                     <div class="flex-container">
                         <div class="flex-item">
                                 <asp:ValidationSummary runat="server" ShowSummary="true" />
                         </div>
                     </div>
                 </section>
-                <section class="form-item">
+                <section class="form-item submit-button-container">
                     <div class="flex-container">
                         <div class="flex-item">
-                            <asp:Button runat="server" Text="Submit"/>
+                            <input type="submit" value="Submit" />
                         </div>
                     </div>
+                </section>
+                <section class="form-item" id="summaryInformation" runat="server">
+
                 </section>
             </div>   
         </form>
