@@ -211,3 +211,9 @@ E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\obj\Debug\N01330009-Assig
 E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\obj\Debug\N01330009-Assignment-1.csproj.CopyComplete
 E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\obj\Debug\N01330009-Assignment-1.dll
 E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\obj\Debug\N01330009-Assignment-1.pdb
+E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\bin\ICSharpCode.SharpZipLib.dll
+E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\bin\NPOI.dll
+E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\bin\NPOI.OOXML.dll
+E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\bin\NPOI.OpenXml4Net.dll
+E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\bin\NPOI.OpenXmlFormats.dll
+E:\Study\N01330009-Assignment-1\N01330009-Assignment-1\bin\ICSharpCode.SharpZipLib.xml

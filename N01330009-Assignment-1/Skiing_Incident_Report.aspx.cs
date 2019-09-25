@@ -19,11 +19,12 @@ namespace N01330009_Assignment_1
                 {
                     Dictionary<string, string> environment_weather_values = new Dictionary<string, string>();
                     environment_weather_values.Add("environment_weather_type_1","Clear (The sky was clear or had some clouds)");
-                    environment_weather_values.Add("environment_weather_type_2","Snowing (It was snowing at the time of the incident)");
-                    environment_weather_values.Add("environment_weather_type_3","Raining (It was raining at the time of the incident)");
-                    environment_weather_values.Add("environment_weather_type_4","Fog (There was fog at the time and place of the incident)");
-                    environment_weather_values.Add("environment_weather_type_5","Unknown (Incident was not reported when it occurred but at a later date/time)");
-                    environment_weather_values.Add("environment_weather_type_6","N/A (Not applicable ie: indoors)");
+                    environment_weather_values.Add("environment_weather_type_2","Overcast (There was a general overcast)");
+                    environment_weather_values.Add("environment_weather_type_3","Snowing (It was snowing at the time of the incident)");
+                    environment_weather_values.Add("environment_weather_type_4","Raining (It was raining at the time of the incident)");
+                    environment_weather_values.Add("environment_weather_type_5","Fog (There was fog at the time and place of the incident)");
+                    environment_weather_values.Add("environment_weather_type_6","Unknown (Incident was not reported when it occurred but at a later date/time)");
+                    environment_weather_values.Add("environment_weather_type_7","N/A (Not applicable ie: indoors)");
 
                     Dictionary<string, string> incident_place_temprature_values = new Dictionary<string, string>();
                     incident_place_temprature_values.Add("incident_place_temprature_type_1","Above10 (At the time and site air temperature estimate above 10)");
@@ -102,13 +103,13 @@ namespace N01330009_Assignment_1
 
                     htmlContent += "<p>Actions Taken: <span class='incident-summary-values'>" + actions_taken_after_incident_value + "</span></p>";
 
-                    htmlContent += "<p>Witness Fullname: <span class='incident-summary-values'>" + witness_first_name_value +  witness_last_name_value + "</span></p>";
+                    htmlContent += "<p>Witness fullname: <span class='incident-summary-values'>" + witness_first_name_value +  witness_last_name_value + "</span></p>";
                     
                     htmlContent += "<p>Witness phone number: <span class='incident-summary-values'>" + witness_phone_number_value + "</span></p>";
 
-                    htmlContent += "<p>Witness email Id: <span class='incident-summary-values'>" + witness_email_value + "</span></p>";
+                    htmlContent += "<p>Witness email ID: <span class='incident-summary-values'>" + witness_email_value + "</span></p>";
 
-                    summaryInformation.InnerHtml = htmlContent;
+                    confirmbox.InnerHtml = htmlContent;
 
                 }
             }

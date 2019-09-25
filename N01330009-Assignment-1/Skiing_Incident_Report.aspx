@@ -97,8 +97,9 @@
             background-color: #ffebee;
             color:#c62828;
         }
-        #summaryInformation{
+        #confirmbox{
             background-color: #e3f2fd;
+            padding: 10px;
         }
         .incident-summary-values{
             font-weight: bold;
@@ -382,7 +383,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="form-item" id="summaryInformation" runat="server">
+                <section class="form-item" id="confirmbox" runat="server">
 
                 </section>
             </div>   
