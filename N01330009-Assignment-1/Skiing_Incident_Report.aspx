@@ -106,6 +106,15 @@
             display: inline !important;
             color:#1e88e5 !important;
         }
+        .success-text{
+            color: #004d40 !important;
+        }
+        .danger-text{
+            color: #b71c1c !important;
+        }
+        .info-text{
+            color: #ff6f00 !important;
+        }
     </style>
 </head>
 <body>
@@ -128,6 +137,7 @@
                         <div class="flex-item">
                             <asp:TextBox ID="incident_date" runat="server" TextMode="Date"></asp:TextBox>
                             <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter date of an incident" ControlToValidate="incident_date"></asp:RequiredFieldValidator>
+                            <asp:CustomValidator runat="server" ControlToValidate="incident_date" onservervalidate="valDateRange_ServerValidate" ErrorMessage="Date can not be greater than today's date." />
                         </div>
                     </div>
                 </section>
@@ -135,14 +145,14 @@
                     <div class="raw-item">Time of Incident</div>
                     <div class="flex-container">
                         <div class="flex-item">
-                            <asp:TextBox ID="incident_time_hours" runat="server" TextMode="Number" placeholder="hours"></asp:TextBox>
+                            <asp:TextBox ID="incident_time_hours" runat="server" placeholder="hours"></asp:TextBox>
                             <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter incident time (Hours)." ControlToValidate="incident_time_hours"></asp:RequiredFieldValidator>
-                            <asp:RangeValidator runat="server" EnableClientScript="true" ControlToValidate="incident_time_hours" ErrorMessage="Incident time hours should be between 0 and 11." MinimumValue="0" MaximumValue="11" ></asp:RangeValidator>
+                            <asp:RangeValidator Type="Integer" runat="server" EnableClientScript="true" ControlToValidate="incident_time_hours" ErrorMessage="Incident time hours should be between 0 and 11." MinimumValue="0" MaximumValue="11" ></asp:RangeValidator>
                         </div>
                         <div class="flex-item">
-                            <asp:TextBox ID="incident_time_minutes" runat="server" TextMode="Number" placeholder="minutes"></asp:TextBox>
+                            <asp:TextBox ID="incident_time_minutes" runat="server" placeholder="minutes"></asp:TextBox>
                             <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please enter incident time (Minutes)." ControlToValidate="incident_time_minutes"></asp:RequiredFieldValidator>
-                            <asp:RangeValidator runat="server" EnableClientScript="true" ControlToValidate="incident_time_minutes" ErrorMessage="Incident time minutes should be between 0 and 59." MinimumValue="0" MaximumValue="59" ></asp:RangeValidator>
+                            <asp:RangeValidator Type="Integer" runat="server" EnableClientScript="true" ControlToValidate="incident_time_minutes" ErrorMessage="Incident time minutes should be between 0 and 59." MinimumValue="0" MaximumValue="59" ></asp:RangeValidator>
                         </div>
                         <div  class="flex-item">
                             <asp:DropDownList runat="server" ID="incident_time_type">
@@ -297,6 +307,19 @@
                         <div class="flex-item">
                             <asp:TextBox id="actions_taken_after_incident" TextMode="multiline" Columns="5" Rows="5" runat="server" />
                             <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please fill the value for actions taken. (If no actions has been taken, Just place 'None' in the field.)" ControlToValidate="actions_taken_after_incident"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-item">
+                    <div class="raw-item">If any person(s) had serious injuries in the incident?</div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                              <asp:DropDownList runat="server" ID="is_serious_injuries">
+                                <asp:ListItem Text="Yes / No" Value="" selected="true" disabled="true"></asp:ListItem>
+                                <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
+                                <asp:ListItem Text="No" Value="No"></asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator  runat="server" EnableClientScript="true" ErrorMessage="Please mention if any person had serious injuries in this incident or not." ControlToValidate="is_serious_injuries"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </section>

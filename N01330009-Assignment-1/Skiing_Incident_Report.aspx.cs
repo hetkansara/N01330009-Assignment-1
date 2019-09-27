@@ -11,12 +11,12 @@ namespace N01330009_Assignment_1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack)
-            {
+            if (Page.IsPostBack) {
+
                 Page.Validate();
                 
-                if (Page.IsValid)
-                {
+                if (Page.IsValid) {
+
                     Dictionary<string, string> environment_weather_values = new Dictionary<string, string>();
                     environment_weather_values.Add("environment_weather_type_1","Clear (The sky was clear or had some clouds)");
                     environment_weather_values.Add("environment_weather_type_2","Overcast (There was a general overcast)");
@@ -66,7 +66,7 @@ namespace N01330009_Assignment_1
                     string incident_date_value = incident_date.Text.ToString();
                     string incident_time_hours_value = incident_time_hours.Text.ToString();
                     string incident_time_minutes_value = incident_time_minutes.Text.ToString();
-                    string incident_time_type_value = incident_time_type.Text.ToString();
+                    string incident_time_type_value = incident_time_type.SelectedValue.ToString();
                     string incident_location_value = incident_location.Text.ToString();
                     string incident_description_value = incident_description.Text.ToString();
                     string environment_weather_value = environment_weather.Text.ToString();
@@ -75,10 +75,13 @@ namespace N01330009_Assignment_1
                     string environment_light_value = environment_light.Text.ToString();
                     string incident_place_surface_value = incident_place_surface.Text.ToString();
                     string actions_taken_after_incident_value = actions_taken_after_incident.Text.ToString();
+                    string is_serious_injuries_value = is_serious_injuries.Text.ToString();
                     string witness_first_name_value = witness_first_name.Text.ToString();
                     string witness_last_name_value = witness_last_name.Text.ToString();
                     string witness_phone_number_value = witness_phone_number.Text.ToString();
                     string witness_email_value = witness_email.Text.ToString();
+                    DateTime incident_parced_date = DateTime.Parse(incident_date_value);
+                    DateTime today_date = DateTime.Now;
 
                     var htmlContent = "";
                     htmlContent = "<h2>Information Summary</h2>";
@@ -109,10 +112,43 @@ namespace N01330009_Assignment_1
 
                     htmlContent += "<p>Witness email ID: <span class='incident-summary-values'>" + witness_email_value + "</span></p>";
 
+                    htmlContent += "<p>Serious Injuries: <span class='incident-summary-values'>" + is_serious_injuries_value + "</span></p>";
+
+                    // Found solution for substracting date from https://stackoverflow.com/questions/32900147/subtracting-dates-in-asp-net-with-c-sharp
+                    int incident_old_in_days = today_date.Subtract(incident_parced_date).Days;
+
+                    /* 
+                       If incident is > 30 days old & No serious injuries -> Mostly Resolved
+                       If incident is > 30 days old & Some serious injuries -> Requires urgent attention.
+                       If incident is 15-30 days old & Some serious injuries -> Requires urgent attention.
+                       If incident is 15-30 days old & No serious injuries -> Requires urgent attention.
+                       If incident is < 15 days old & Some serious injuries -> Requires urgent attention.
+                       If incident is < 15 days old & No serious injuries -> Requires investigation.
+                    */
+                    if (incident_old_in_days > 30 && is_serious_injuries_value != "Yes") {
+                        htmlContent += "<p><span class='incident-summary-values success-text'>This incident has been resolved.</span></p>";
+                    } else if (incident_old_in_days > 15 || is_serious_injuries_value == "Yes") { 
+                        htmlContent += "<p><span class='incident-summary-values danger-text'>This incident requires urgent attention.</span></p>";
+                    } else {
+                        htmlContent += "<p><span class='incident-summary-values info-text'>This incident requires investigation.</span></p>";
+                    }
+
                     confirmbox.InnerHtml = htmlContent;
 
                 }
             }
+        }
+
+        // Found date validator solution from https://stackoverflow.com/questions/939802/date-validation-with-asp-net-validator
+        // It will take today's date and check if the incident date is less than today's date or not.
+        protected void valDateRange_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            DateTime maxDate = DateTime.Now;
+            DateTime dt;
+
+            args.IsValid = (DateTime.TryParse(args.Value, out dt)
+                && dt <= maxDate);
+
         }
     }
 }

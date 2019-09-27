@@ -139,6 +139,15 @@ namespace N01330009_Assignment_1 {
         protected global::System.Web.UI.WebControls.TextBox actions_taken_after_incident;
         
         /// <summary>
+        /// is_serious_injuries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList is_serious_injuries;
+        
+        /// <summary>
         /// witness_first_name control.
         /// </summary>
         /// <remarks>
